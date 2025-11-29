@@ -1,0 +1,99 @@
+#const heroes = [
+  "Batman",
+  "Robin",
+  "Iron Man",
+  "Spider-Man",
+  "Wonder Woman",
+  "Superman",
+];
+
+const aliados = [
+  "Batman",
+  "Robin",
+  "Iron Man",
+  "Spider-Man",
+  "Wonder Woman",
+  "Superman",
+];
+
+const enemigos = [
+  "Joker",
+  "Green Goblin",
+  "Lex Luthor",
+];
+
+function esAliado(x, y) {
+  return (
+    (x === "Batman" && y === "Robin") ||
+    (x === "Iron Man" && y === "Spider-Man") ||
+    (x === "Wonder Woman" && y === "Superman")
+  );
+}
+
+function esEnemigo(x, y) {
+  return (
+    (x === "Batman" && y === "Joker") ||
+    (x === "Spider-Man" && y === "Green Goblin") ||
+    (x === "Superman" && y === "Lex Luthor")
+  );
+}
+
+function esMentor(x, y) {
+  return (
+    (x === "Batman" && y === "Robin") ||
+    (x === "Iron Man" && y === "Spider-Man")
+  );
+}
+
+function encontrarAliadosDe(h) {
+  return aliados.filter((y) => esAliado(h, y));
+}
+
+function encontrarEnemigosDe(h) {
+  return enemigos.filter((y) => esEnemigo(h, y));
+}
+
+function encontrarMentorDe(h) {
+  return heroes.filter((x) => esMentor(x, h));
+}
+
+function todosLosParesHeroeAliado() {
+  const pares = [];
+  for (const x of heroes) {
+    for (const y of aliados) {
+      if (esAliado(x, y)) {
+        pares.push([x, y]);
+      }
+    }
+  }
+  return pares;
+}
+
+function imprimirLista(titulo, lista) {
+  console.log(`\n${titulo}`);
+  if (lista.length === 0) {
+    console.log("- (sin resultados)");
+  } else {
+    for (const item of lista) {
+      console.log(`- ${item}`);
+    }
+  }
+}
+function imprimirPares(titulo, pares) {
+  console.log(`\n${titulo}`);
+  if (pares.length === 0) {
+    console.log("- (sin resultados)");
+  } else {
+    for (const [x, y] of pares) {
+      console.log(`- ${x} ↔ ${y}`);
+    }
+  }
+}
+const aliadosDeBatman = encontrarAliadosDe("Batman");
+const enemigosDeSuperman = encontrarEnemigosDe("Superman");
+const mentorDeSpiderMan = encontrarMentorDe("Spider-Man");
+const paresHeroeAliado = todosLosParesHeroeAliado();
+imprimirLista("Aliados de Batman:", aliadosDeBatman);
+imprimirLista("Enemigos de Superman:", enemigosDeSuperman);
+imprimirLista("Mentor de Spider-Man?", mentorDeSpiderMan);
+imprimirPares("Todos los pares heroe-aliado:", paresHeroeAliado);
